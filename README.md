@@ -1,4 +1,4 @@
-# 1. Interfaces vs. Types in TypeScript: What’s the Difference?
+# 1. What are some differences between interfaces and types in TypeScript?
 
 TypeScript offers two powerful tools for defining shapes of data: **interfaces** and **types**. While they often seem interchangeable, understanding their differences can help you make informed decisions about when to use each.
 
@@ -126,7 +126,7 @@ const employee: Employee = {
 
 Interfaces and types are both essential in TypeScript, but they serve slightly different purposes. Interfaces shine in object-oriented scenarios and declaration merging, while types offer unmatched flexibility for diverse type definitions. Choose based on your project’s needs, but don’t hesitate to use both when appropriate.
 
-# 2. Understanding any, unknown, and never Types in TypeScript
+# 2. Explain the difference between any, unknown, and never types in TypeScript
 
 TypeScript’s type system includes special types—any, unknown, and never—that handle edge cases and ensure type safety. Misusing these types can lead to bugs or unsafe code, so let’s explore their differences and best practices.
 
