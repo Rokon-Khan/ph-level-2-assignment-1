@@ -8,7 +8,8 @@ TypeScript offers two powerful tools for defining shapes of data: **interfaces**
 
 - **Interfaces**: Defined using the interface keyword. They are primarily used to describe object shapes or class contracts.
     
-```type User = {
+```
+type User = {
   name: string;
   age: number;
 };
