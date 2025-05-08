@@ -9,33 +9,37 @@ TypeScript offers two powerful tools for defining shapes of data: **interfaces**
 - **Interfaces**: Defined using the interface keyword. They are primarily used to describe object shapes or class contracts.
     
 ```
-type User = {
+interface User {
   name: string;
   age: number;
-};
+}
 ```
 
     
 - **Types**: Defined using the type keyword with a broader scope, allowing for more flexible type definitions, including unions, intersections, and primitives.
     
-    `type User = {
+    ```
+    type User = {
       name: string;
       age: number;
-    };`
+    };
+    ```
     
 
 ### **2. Extending and Merging**
 
 - **Interfaces**: Support **declaration merging**, meaning you can redefine an interface with the same name, and TypeScript will merge the declarations. This is particularly useful for extending third-party library types.
     
-    `interface User {
+    ```
+    interface User {
       name: string;
     }
     interface User {
       age: number;
     }
     *// Merged: User has both name and age*
-    const user: User = { name: "Alice", age: 30 };`
+    const user: User = { name: "Alice", age: 30 };
+    ```
     
 - **Types**: Do not support declaration merging. However, you can combine types using **intersection** (&) or **union** (|) operators.
     
@@ -49,38 +53,46 @@ type User = {
 
 - **Interfaces**: Best suited for defining object shapes and contracts for classes. They are less flexible for complex type manipulations.
     
-    `interface Printable {
+    ```
+    interface Printable {
       print(): string;
     }
     class Book implements Printable {
       print() {
         return "Printing book";
       }
-    }`
+    }
+    ```
     
 - **Types**: More versatile, supporting union types, primitive types, and complex type operations.
     
-    `type ID = string | number; *// Union type*
-    type Status = "active" | "inactive"; *// Literal type*`
+    ```
+      type ID = string | number; *// Union type*
+      type Status = "active" | "inactive"; *// Literal type*
+    ```
     
 
 ### **4. Extensibility**
 
 - **Interfaces**: Use extends to inherit from other interfaces.
     
-    `interface Person {
+    ```
+    interface Person {
       name: string;
     }
     interface Employee extends Person {
       role: string;
     }
-    const employee: Employee = { name: "Charlie", role: "Developer" };`
+    const employee: Employee = { name: "Charlie", role: "Developer" };
+    ```
     
 - **Types**: Use intersection (&) to combine types, but cannot use extends.
     
-    `type Person = { name: string };
+    ```
+    type Person = { name: string };
     type Employee = Person & { role: string };
-    const employee: Employee = { name: "Dave", role: "Manager" };`
+    const employee: Employee = { name: "Dave", role: "Manager" };
+    ```
     
 
 ### When to Use Each
@@ -96,11 +108,8 @@ type User = {
 
 ### Example: Combining Both
 
-typescript
-
-Copy
-
-`interface Person {
+```
+interface Person {
   name: string;
 }
 type Contact = { email: string };
@@ -110,7 +119,8 @@ interface Employee extends Person {
 const employee: Employee = {
   name: "Eve",
   details: { email: "eve@example.com" },
-};`
+};
+```
 
 ### Conclusion
 
@@ -130,9 +140,11 @@ The any type is TypeScript’s escape hatch, disabling type checking for a value
 
 **Example**:
 
-`let data: any = "Hello";
+```
+let data: any = "Hello";
 data = 42; *// No error*
-data.foo(); *// No error, but runtime error if method doesn’t exist*`
+data.foo(); *// No error, but runtime error if method doesn’t exist*
+```
 
 ### **2. The unknown Type**
 
@@ -144,11 +156,13 @@ The unknown type is a safer alternative to any. It represents a value of any typ
 
 **Example**:
 
-`let input: unknown = "Hello";
+```
+let input: unknown = "Hello";
 *// input.toUpperCase(); // Error: Object is of type 'unknown'*
 if (typeof input === "string") {
   console.log(input.toUpperCase()); *// Safe: HELLO*
-}`
+}
+```
 
 ### **3. The never Type**
 
@@ -160,7 +174,8 @@ The never type represents a value that **never occurs**. It’s used for functio
 
 **Example**:
 
-`function throwError(message: string): never {
+```
+function throwError(message: string): never {
   throw new Error(message);
 }
 
@@ -168,7 +183,8 @@ function exhaustiveCheck(value: string | number): string {
   if (typeof value === "string") return "String";
   if (typeof value === "number") return "Number";
   throwError("Unreachable"); *// never*
-}`
+}
+```
 
 ### Comparing the Three
 
@@ -186,7 +202,8 @@ function exhaustiveCheck(value: string | number): string {
 
 ### Example: Practical Application
 
-`function processInput(input: unknown): string {
+```
+function processInput(input: unknown): string {
   if (typeof input === "string") {
     return input.toUpperCase();
   } else if (typeof input === "number") {
@@ -196,8 +213,9 @@ function exhaustiveCheck(value: string | number): string {
 }
 
 console.log(processInput("hello")); *// HELLO*
-console.log(processInput(42)); *// "42"// processInput(true); // Throws error*`
+console.log(processInput(42)); *// "42"// processInput(true); // Throws error*
+```
 
-### Takeaway
+### Conclusion
 
 The any, unknown, and never types serve distinct purposes in TypeScript. Use any sparingly to avoid losing type safety, embrace unknown for handling dynamic data with checks, and leverage never to enforce exhaustive logic. Mastering these types will make your TypeScript code safer and more robust.
