@@ -37,16 +37,18 @@ interface User {
     interface User {
       age: number;
     }
-    *// Merged: User has both name and age*
+    // Merged: User has both name and age
     const user: User = { name: "Alice", age: 30 };
     ```
     
 - **Types**: Do not support declaration merging. However, you can combine types using **intersection** (&) or **union** (|) operators.
     
-    `type Name = { name: string };
+    ```
+    type Name = { name: string };
     type Age = { age: number };
-    type User = Name & Age; *// Intersection*
-    const user: User = { name: "Bob", age: 25 };`
+    type User = Name & Age; // Intersection
+    const user: User = { name: "Bob", age: 25 };
+    ```
     
 
 ### **3. Flexibility**
@@ -67,8 +69,8 @@ interface User {
 - **Types**: More versatile, supporting union types, primitive types, and complex type operations.
     
     ```
-      type ID = string | number; *// Union type*
-      type Status = "active" | "inactive"; *// Literal type*
+      type ID = string | number; // Union type
+      type Status = "active" | "inactive"; // Literal type*
     ```
     
 
@@ -142,8 +144,8 @@ The any type is TypeScript’s escape hatch, disabling type checking for a value
 
 ```
 let data: any = "Hello";
-data = 42; *// No error*
-data.foo(); *// No error, but runtime error if method doesn’t exist*
+data = 42; // No error
+data.foo(); // No error, but runtime error if method doesn’t exist
 ```
 
 ### **2. The unknown Type**
@@ -158,9 +160,9 @@ The unknown type is a safer alternative to any. It represents a value of any typ
 
 ```
 let input: unknown = "Hello";
-*// input.toUpperCase(); // Error: Object is of type 'unknown'*
+*// input.toUpperCase(); // Error: Object is of type 'unknown'
 if (typeof input === "string") {
-  console.log(input.toUpperCase()); *// Safe: HELLO*
+  console.log(input.toUpperCase()); // Safe: HELLO
 }
 ```
 
@@ -182,7 +184,7 @@ function throwError(message: string): never {
 function exhaustiveCheck(value: string | number): string {
   if (typeof value === "string") return "String";
   if (typeof value === "number") return "Number";
-  throwError("Unreachable"); *// never*
+  throwError("Unreachable"); // never
 }
 ```
 
@@ -209,10 +211,10 @@ function processInput(input: unknown): string {
   } else if (typeof input === "number") {
     return input.toString();
   }
-  throwError("Invalid input"); *// never*
+  throwError("Invalid input"); // never
 }
 
-console.log(processInput("hello")); *// HELLO*
+console.log(processInput("hello")); // HELLO
 console.log(processInput(42)); *// "42"// processInput(true); // Throws error*
 ```
 
